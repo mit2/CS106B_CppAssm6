@@ -197,10 +197,6 @@
 				RelativePath=".\snippets.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\snippets_2.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"

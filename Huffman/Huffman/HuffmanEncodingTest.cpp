@@ -702,6 +702,7 @@ void testCompleteStack() {
 		
 		/* Take a snapshot of total memory usage. */
 		long difference = numAllocations() - numDeallocations();
+		cout << numAllocations()<< " -- " << numDeallocations() << " -- " << difference << endl;
 	
 		/* Open the file to compress. */
 		ifbstream input("test/encodeDecode/" + file);
@@ -724,6 +725,7 @@ void testCompleteStack() {
 		/* Confirm that it matches. */
 		checkCondition(originalData.str() == decompressedData.str(),
 		               "Compressed/decompressed data matches.");
+		cout << numAllocations()<< " -- " << numDeallocations() << " -- " << difference << endl;
 									 
 		checkCondition(numAllocations() - numDeallocations() == difference,
 		               "No tree nodes leaked.");

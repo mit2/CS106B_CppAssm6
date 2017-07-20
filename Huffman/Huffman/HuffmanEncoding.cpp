@@ -355,7 +355,7 @@ void decompress(ibstream& infile, ostream& outfile) {
 	Map<ext_char, int> freq = readFileHeader(infile);
 	Node* encodingTree = buildEncodingTree(freq);
 	decodeFile(infile, encodingTree, outfile);
-	//freeTree(encodingTree);
+	//freeTree(encodingTree);  // I don't know why in this call here freeTree() raise Access memory violation error, as freeTree() pass official Stanford 5th Test...
 
 }
 
