@@ -119,10 +119,9 @@ void freeTree(Node* root) {
 //*********************************************************
 
 /* Function: getFrequencyTable
- * Usage: Map<ext_char, string> encodingTable = buildEncodingMap(encodingTree, encoding);
+ * Usage: buildEncodingMap(encodingTree, encoding);
  * --------------------------------------------------------
  * Builds encoding Map by mapping char to it's encoding.
- * Return encoding map.
  */
 void buildEncodingMap(Node* root, string encoding, Map<ext_char, string>& encodingMap){
 	string bitPattern_1 = encoding; 
@@ -332,7 +331,12 @@ Map<ext_char, int> readFileHeader(ibstream& infile) {
  * primarily be glue code.
  */
 void compress(ibstream& infile, obstream& outfile) {
-	// TODO: Implement this!
+	Map<ext_char, int> freq =  getFrequencyTable(infile);
+	infile.rewind();
+	Node* encodingTree = buildEncodingTree(freq);
+	writeFileHeader(outfile, freq);
+	encodeFile(infile, encodingTree, outfile);
+	freeTree(encodingTree);
 }
 
 /* Function: decompress
@@ -348,6 +352,10 @@ void compress(ibstream& infile, obstream& outfile) {
  * primarily be glue code.
  */
 void decompress(ibstream& infile, ostream& outfile) {
-	// TODO: Implement this!
+	Map<ext_char, int> freq = readFileHeader(infile);
+	Node* encodingTree = buildEncodingTree(freq);
+	decodeFile(infile, encodingTree, outfile);
+	//freeTree(encodingTree);
+
 }
 
